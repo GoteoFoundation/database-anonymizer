@@ -51,6 +51,7 @@ class ConfigGuesser
     {
         $hints = [];
         $sm = $connection->getSchemaManager();
+        $connection->getSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
         foreach ($sm->listTables() as $table) {
             $tableName = $table->getName();

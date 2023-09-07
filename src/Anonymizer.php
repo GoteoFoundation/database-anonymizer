@@ -25,6 +25,7 @@ class Anonymizer
         foreach ($targets as $targetTable) {
             if ($targetTable->isTruncate()) {
                 $dbPlatform = $connection->getDatabasePlatform();
+                $dbPlatform->registerDoctrineTypeMapping('enum', 'string');
                 $connection->query('SET FOREIGN_KEY_CHECKS=0');
                 $truncateQuery = $dbPlatform->getTruncateTableSql($targetTable->getName());
                 $connection->executeUpdate($truncateQuery);
